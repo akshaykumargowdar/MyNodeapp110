@@ -3,9 +3,9 @@
   <head>
     <title> Sample Application </title>
     <!-- <link rel='stylesheet' href='/stylesheets/style2.css' /> -->
-	<!-- <script src="/javascripts/audiodisplay.js"></script> -->
+	<!-- <script src="/javascripts/audiodisplay.js"></script> 
 	<script src="/javascripts/recorder.js"></script>
-	<script src="/javascripts/main.js"></script>
+	<script src="/javascripts/main.js"></script> -->
 	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"> </script>
 	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"> </script>
 <script>
@@ -14,10 +14,8 @@ app.controller('myctr', function($scope, $http) {
          $scope.myData = [];
          $scope.send = function(){    
           $http.get("/speechtotext").then(function (response) {          
-             $scope.myData.push(response.data);
-	     
-			  
-          });
+          $scope.myData.push(response.data);
+	     });
      }
 });
 </script>
@@ -37,11 +35,55 @@ app.controller('myctr', function($scope, $http) {
 	<tr> <td> <button ng-click="send()" > click </button> </td></tr>
 </table>
 </div>
-
+<!--
 <div align="center" id="controls">
 		<img id="record" src="/images/mic128.png" onclick="toggleRecording(this);">
 		<a id="save" href="#"><img src="/images/save.svg"></a>
 </div>
+-->
+<br><br>
+<audio controls autoplay></audio>
+    		<script type="text/javascript" src="recorder.js"> </script>
+                    
+    		<input onclick="startRecording()" type="button" value="start recording" />
+    		<input onclick="stopRecording()" type="button" value="stop recording and play" />
+		<script>
+    			var onFail = function(e) {
+    				console.log('Rejected!', e);
+    			};
+
+    			var onSuccess = function(s) {
+    				var context = new webkitAudioContext();
+    				var mediaStreamSource = context.createMediaStreamSource(s);
+    				recorder = new Recorder(mediaStreamSource);
+    				recorder.record();
+
+    				// audio loopback
+    				// mediaStreamSource.connect(context.destination);
+    			}
+
+    			window.URL = window.URL || window.webkitURL;
+    			navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
+    			var recorder;
+    			var audio = document.querySelector('audio');
+
+    			function startRecording() {
+    				if (navigator.getUserMedia) {
+    					navigator.getUserMedia({audio: true}, onSuccess, onFail);
+    				} else {
+    					console.log('navigator.getUserMedia not present');
+    				}
+    			}
+
+    			function stopRecording() {
+    				recorder.stop();
+    				recorder.exportWAV(function(s) {
+                                
+                                 	audio.src = window.URL.createObjectURL(s);
+    				});
+    			}
+    		</script>
 
   </body>
 </html>
