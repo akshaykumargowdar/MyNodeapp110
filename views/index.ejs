@@ -14,8 +14,8 @@ app.controller('myctr', function($scope, $http) {
          $scope.myData = "";
          $scope.send = function(){    
           $http.get("/speechtotext").then(function (response) {          
-              <!--$scope.myData.push(response.data);-->
-	      $scope.myData.push(response.data) ;
+             $scope.myData.push(response.data);
+	     
 			  
           });
      }
