@@ -49,7 +49,7 @@ router.get('/speechtotext', function(req, res, next) {
     if (error)
       console.log('Error:', error);
     else
-      res.send(transcript.results[0].alternatives[0].transcript);
+      res.send(transcript.results[0].alternatives[0]);
       
   });
 	
