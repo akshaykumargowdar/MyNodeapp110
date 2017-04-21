@@ -30,7 +30,7 @@ router.get('/texttospeech', function(req, res, next) {
 // Pipe the synthesized text to a file.
 text_to_speech.synthesize(params).on('error', function(error) {
   console.log('Error:', error);
-}).pipe(fs.createWriteStream('/audio1.wav'));
+}).pipe(fs.createWriteStream('./public/audio/audio2.wav'));
 	
 });
   
