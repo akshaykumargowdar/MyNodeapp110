@@ -33,9 +33,9 @@ app.controller('myctr', function($scope, $http) {
 <div>
 <table border="0" align="center">
     <tr> <td> <textarea cols="50" rows="15"> 
-  	<div ng-repeat = "x in myData">
-	{{ x.transcript }}
-	<div>
+  	 <div  ng-repeat ="x in myData">
+		{{ x.transcript }}
+	</div>
     </textarea> </td></tr> 
 	<br>
 	<tr> <td> <button ng-click="send()" > click </button> </td></tr>
