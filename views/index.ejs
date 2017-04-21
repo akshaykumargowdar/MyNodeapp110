@@ -80,7 +80,7 @@ app.controller('myctr', function($scope, $http) {
     			}
 
     			function stopRecording() {
-    				recorder.stop();
+    				<!-- recorder.stop();-->
     				recorder.exportWAV(function(s) {
                                 
                                  	audio.src = window.URL.createObjectURL(s);
