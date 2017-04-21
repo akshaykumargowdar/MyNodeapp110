@@ -44,7 +44,7 @@ app.controller('myctr', function($scope, $http) {
 -->
 <br><br>
 <audio controls autoplay>
- <source src="audio.src" type="audio/src">
+ <source src="output.wav" type="audio/wav">
 </audio>
     		<script src="/javascripts/recorder1.js"> </script>
                     
@@ -80,7 +80,7 @@ app.controller('myctr', function($scope, $http) {
     			}
 
     			function stopRecording() {
-    				<!-- recorder.stop();-->
+    				recorder.stop();
     				recorder.exportWAV(function(s) {
                                 
                                  	audio.src = window.URL.createObjectURL(s);
