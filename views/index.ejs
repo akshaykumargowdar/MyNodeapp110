@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Sample Application </title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style2.css' /> -->
+	<!-- <script src="/javascripts/audiodisplay.js"></script> -->
+	<script src="/javascripts/recorder.js"></script>
+	<script src="/javascripts/main.js"></script>
+	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"> </script>
+	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"> </script>
+<script>
+var app = angular.module('myApp',  ["ngRoute"]);
+app.controller('myctr', function($scope, $http) {
+         $scope.myData = []; 
+         $scope.send = function(){    
+          $http.get("/speechtotext").then(function (response) {          
+              $scope.myData.push(response.data);
+			  
+          });
+     }
+});
+</script>
+
+  </head>
+  
+  
+<body bgcolor="#669999" ng-app="myApp" ng-controller="myctr">
+  
+  <div> <h1 align="center"> Welocme to The Shopping site </h1> <br> </div>
+
+<br><br>
+<div>
+<table border="0" align="center">
+    <tr> <td> <textarea cols="50" rows="15"> {{ myData }} </textarea> </td></tr> 
+	<br>
+	<tr> <td> <button ng-click="send()" > click </button> </td></tr>
+</table>
+</div>
+
+<div align="center" id="controls">
+		<img id="record" src="/images/mic128.png" onclick="toggleRecording(this);">
+		<a id="save" href="#"><img src="/images/save.svg"></a>
+</div>
+
+  </body>
+</html>
