@@ -11,11 +11,11 @@
 <script>
 var app = angular.module('myApp',  ["ngRoute"]);
 app.controller('myctr', function($scope, $http) {
-         $scope.myData = [];
+         $scope.myData = "";
          $scope.send = function(){    
           $http.get("/speechtotext").then(function (response) {          
               <!--$scope.myData.push(response.data);-->
-	      $scope.myData = response.data ;
+	      $scope.myData.push(response.data) ;
 			  
           });
      }
