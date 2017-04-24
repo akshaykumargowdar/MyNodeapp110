@@ -61,8 +61,4 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/conversationapp',function(req,res,next) {
-	res.sendFile('conversation.html', { 'type' : 'text/html');
-});
-
 module.exports = router;
