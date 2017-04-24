@@ -5,6 +5,35 @@ var router = express.Router();
 var TextToSpeechV1 = require('watson-developer-cloud/text-to-speech/v1');
 var SpeechToTextV1 = require('watson-developer-cloud/speech-to-text/v1');
 
+var watson = require('watson-developer-cloud');
+
+var conversation = watson.conversation({
+  username: '5043ed03-83d8-4e15-883f-c24ad92d1254',
+  password: 'KMdzXlqvxLXu',
+  version: 'v1',
+  version_date: '2017-04-24'
+});
+
+
+var context = {};
+var response;
+
+router.get('/firstcall', function(req, res, next) {
+	
+  					conversation.message({
+  					workspace_id: '1e018105-1f52-4539-acbe-ac166b80631a',
+  				 	input: {'text': req.myData },
+  						context: context
+						},  function(err, response) {
+  										if (err)
+    										console.log('error:', err);
+  										else
+    										  res.send(response.output.text[0]);
+									     });
+
+                                       
+					});
+
 var text_to_speech = new TextToSpeechV1({
     username: '69bfd0da-dd82-416c-8043-901a66dda6b0',
     password: 'yT2ZMmqPKrDv',
