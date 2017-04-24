@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>
+Conversation App
+</title>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"> </script>
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"> </script>
+
+<script>
+var app = angular.module("myApp",  ["ngRoute"]);
+/* app.controller("myctr", function($scope, $http) {
+         $scope.myData = []; 
+         $scope.send = function(){    
+          $http.get("/speechtotext").then(function (response) {          
+              $scope.myData.push(response.data);
+			  
+          });
+     }
+});
+*/
+app.controller('mycontroller', function($scope,$http) {
+	
+	$scope.myData = [];
+	$http.get('/firstcall',function(response){
+			$scope.myData.push(response.data);
+	});
+	
+});
+</script>
+</head>
+
+<body bgcolor="#999966" ng-app="myApp" ng-controller="Mycontroller">
+<br><br>
+<h1 align="center"> Welcome to the chat App </h1>
+<br><br>
+
+<form name="myForm" >
+<table align="center">
+<tr> <td> <textarea rows="15" cols="50"> {{ myData }}  </textarea> </td></tr>
+<br>
+
+<tr> <td> <input type="text" / > </td></tr>
+</table>
+</form>
+</body>
+</html>
