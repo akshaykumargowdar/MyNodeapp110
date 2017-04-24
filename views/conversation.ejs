@@ -15,10 +15,15 @@ app.controller('mycontroller', function($scope,$http) {
 	$http.get('/firstcall').then(function(response){
 			$scope.myData.push(response.data);
 	});
-	$http.get('/firstcall').then(function(response){
+	
+	function send1() {
+	$scope.myData.push($scope.input.question);
+	$http.post('/consecutivecalls').then(function(response){
 			$scope.myData.push(response.data);
 	});
+	
 });
+
 </script>
 </head>
 
@@ -32,7 +37,9 @@ app.controller('mycontroller', function($scope,$http) {
 <tr> <td> <div rows="15" cols="50" ng-repeat = "x in myData"> {{ x  }}  <br/> </div> </td></tr>
 <br>
 
-<tr> <td> <input type="text" / > </td></tr>
+<tr> 
+<td> <input type="text" ng-model="input.question" ng-minlength="1" / > </td>
+<td> <button type="button" onclick="send1()" > Send </button> </td>
 </table>
 </form>
 </body>
