@@ -62,6 +62,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/conversationapp', function(req,res,next) { 
-	res.sendFile('./views/conversation.html');
+	res.render('./views/conversation.html', { 'Content-Type' : 'text/html' });
 });
 module.exports = router;
