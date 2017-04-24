@@ -15,7 +15,9 @@ app.controller('mycontroller', function($scope,$http) {
 	$http.get('/firstcall').then(function(response){
 			$scope.myData.push(response.data);
 	});
-	
+	$http.get('/firstcall').then(function(response){
+			$scope.myData.push(response.data);
+	});
 });
 </script>
 </head>
