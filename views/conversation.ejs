@@ -14,15 +14,15 @@ app.controller('mycontroller', function($scope,$http) {
 	$scope.myData = [];
 	$http.get('/firstcall').then(function(response){
 			$scope.myData.push(response.data);
-	});
-	
-	function send1() {
+	});	
+});
+
+function send1() {
 	$scope.myData.push($scope.input.question);
 	$http.post('/consecutivecalls').then(function(response){
 			$scope.myData.push(response.data);
 	});
-	
-});
+	}
 
 </script>
 </head>
@@ -34,7 +34,7 @@ app.controller('mycontroller', function($scope,$http) {
 
 <form name="myForm" >
 <table align="center">
-<tr> <td> <div rows="15" cols="50" ng-repeat = "x in myData"> {{ x  }}  <br/> </div> </td></tr>
+<tr> <td> <div rows="15" cols="50" ng-repeat = "x in myData"> {{ x  }}  <br> </div> </td></tr>
 <br>
 
 <tr> 
