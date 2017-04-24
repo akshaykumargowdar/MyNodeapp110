@@ -8,20 +8,11 @@ Conversation App
 
 <script>
 var app = angular.module("myApp",  ["ngRoute"]);
-/* app.controller("myctr", function($scope, $http) {
-         $scope.myData = []; 
-         $scope.send = function(){    
-          $http.get("/speechtotext").then(function (response) {          
-              $scope.myData.push(response.data);
-			  
-          });
-     }
-});
-*/
+
 app.controller('mycontroller', function($scope,$http) {
 	
 	$scope.myData = [];
-	$http.get('/firstcall',function(response){
+	$http.get('/firstcall').then(function(response){
 			$scope.myData.push(response.data);
 	});
 	
