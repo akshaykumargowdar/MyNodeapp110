@@ -3,20 +3,20 @@
   <head>
     <title> Sample Application </title>
     <!-- <link rel='stylesheet' href='/stylesheets/style2.css' /> -->
-	<!-- <script src="/javascripts/audiodisplay.js"></script> 
-	<script src="/javascripts/recorder.js"></script>
-	<script src="/javascripts/main.js"></script> -->
-	<script src="/javascripts/recorder1.js"></script>
+	<!-- <script src="/javascripts/audiodisplay.js"></script> -->
+	<!-- <script src="/javascripts/recorder.js"></script>-->
+	<!-- <script src="/javascripts/main.js"></script> -->
 	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"> </script>
 	<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"> </script>
 <script>
 var app = angular.module('myApp',  ["ngRoute"]);
 app.controller('myctr', function($scope, $http) {
-         $scope.myData = [];
+         $scope.myData = []; 
          $scope.send = function(){    
           $http.get("/speechtotext").then(function (response) {          
-          $scope.myData.push(response.data);
-	     });
+              $scope.myData.push(response.data);
+			  
+          });
      }
 });
 </script>
@@ -31,62 +31,75 @@ app.controller('myctr', function($scope, $http) {
 <br><br>
 <div>
 <table border="0" align="center">
-    <tr> <td> <textarea cols="50" rows="15">  {{ myData }} </textarea> </td></tr> 
+    <tr> <td> <textarea cols="50" rows="15"> {{ myData }} </textarea> </td></tr> 
 	<br>
 	<tr> <td> <button ng-click="send()" > click </button> </td></tr>
 </table>
 </div>
-<!--
-<div align="center" id="controls">
+
+<!-- <div align="center" id="controls">
 		<img id="record" src="/images/mic128.png" onclick="toggleRecording(this);">
 		<a id="save" href="#"><img src="/images/save.svg"></a>
-</div>
--->
-<br><br>
-<audio controls autoplay>
- <source src="audio.src" type="audio/src">
-</audio>
-    		<script src="/javascripts/recorder1.js"> </script>
-                    
-    		<input onclick="startRecording()" type="button" value="start recording" />
-    		<input onclick="stopRecording()" type="button" value="stop recording and play" />
-		<script>
-    			var onFail = function(e) {
-    				console.log('Rejected!', e);
-    			};
+</div> -->
 
-    			var onSuccess = function(s) {
-    				var context = new webkitAudioContext();
-    				var mediaStreamSource = context.createMediaStreamSource(s);
-    				recorder = new Recorder(mediaStreamSource);
-    				recorder.record();
+<button class="record">Record</button>
+<button class="stop">Stop</button>
 
-    				// audio loopback
-    				// mediaStreamSource.connect(context.destination);
-    			}
-
-    			window.URL = window.URL || window.webkitURL;
-    			navigator.getUserMedia  = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
-
-    			var recorder;
-    			var audio = document.querySelector('audio');
-
-    			function startRecording() {
-    				if (navigator.getUserMedia) {
-    					navigator.getUserMedia({audio: true}, onSuccess, onFail);
-    				} else {
-    					console.log('navigator.getUserMedia not present');
-    				}
-    			}
-
-    			function stopRecording() {
-    				recorder.stop();
-    				recorder.exportWAV(function(s) {
-                                
-                                 	audio.src = window.URL.createObjectURL(s);
-    				});
-    			}
-    		</script>
+<script > 
+	// fork getUserMedia for multiple browser versions, for the future
+// when more browsers support MediaRecorder
+navigator.getUserMedia = ( navigator.getUserMedia ||
+                       navigator.webkitGetUserMedia ||
+                       navigator.mozGetUserMedia ||
+                       navigator.msGetUserMedia);
+// set up basic variables for app
+var record = document.querySelector('.record');
+var stop = document.querySelector('.stop');
+// disable stop button while not recording
+stop.disabled = true;
+// visualiser setup - create web audio api context and canvas
+var audioCtx = new (window.AudioContext || webkitAudioContext)();
+//main block for doing the audio recording
+if (navigator.getUserMedia) {
+  console.log('getUserMedia supported.');
+  var constraints = { audio: true };
+  var chunks = [];
+  var onSuccess = function(stream) {
+    var mediaRecorder = new MediaRecorder(stream);
+    record.onclick = function() {
+      mediaRecorder.start();
+      console.log(mediaRecorder.state);
+      console.log("recorder started");
+      record.style.background = "red";
+      stop.disabled = false;
+      record.disabled = true;
+    }
+    stop.onclick = function() {
+      mediaRecorder.stop();
+      console.log(mediaRecorder.state);
+      console.log("recorder stopped");
+      record.style.background = "";
+      record.style.color = "";
+      // mediaRecorder.requestData();
+      stop.disabled = true;
+      record.disabled = false;
+    }
+    mediaRecorder.onstop = function(e) {
+      console.log("data available after MediaRecorder.stop() called.");      
+      }
+    }
+mediaRecorder.ondataavailable = function(e) {
+      chunks.push(e.data);
+    }
+  }
+  var onError = function(err) {
+    console.log('The following error occured: ' + err);
+  }
+  navigator.getUserMedia(constraints, onSuccess, onError);
+} else {
+   console.log('getUserMedia not supported on your browser!');
+}
+</script>
 
   </body>
 </html>
