@@ -16,14 +16,26 @@ app.controller('mycontroller', function($scope,$http) {
 			$scope.myData.push(response.data);
 	});
 	
-	function send1() {
+	/*function send1() {
         console.log($scope.input.question);
 	$scope.myData.push($scope.input.question);
 	$http.post('/consecutivecalls').then(function(response){
 			$scope.myData.push(response.data);
 	});
-	}
+	*/
 });
+
+app.controller('mycontroller2' , function($scope,$http) {
+	
+	function send1() {
+	console.log("controller2 is hit");
+        console.log($scope.input.question);
+	$scope.myData.push($scope.input.question);
+	$http.post('/consecutivecalls').then(function(response){
+			$scope.myData.push(response.data);
+	});
+});
+	
 
 
 
@@ -39,10 +51,11 @@ app.controller('mycontroller', function($scope,$http) {
 <table align="center">
 <tr> <td> <div rows="15" cols="50" ng-repeat = "x in myData"> {{ x  }}  <br> </div> </td></tr>
 <br>
-
+<div ng-controller='mycontroller2'>
 <tr> 
 <td> <input type="text" ng-model="input.question" / > </td>
-<td> <button type="button" ng-click="send1()" > Send </button> </td>
+<td> <button type="button" ng-click="send1" > Send </button> </td>
+</div>
 </table>
 </form>
 </body>
