@@ -20,6 +20,7 @@ app.controller('mycontroller', function($scope,$http) {
         console.log($scope.input.question);
 	$scope.myData.push($scope.input.question);
 	$http.post('/consecutivecalls').then(function(response){
+		console.log('hit');
 			$scope.myData.push(response.data);
 	});
 	}
