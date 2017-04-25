@@ -22,7 +22,7 @@ app.controller('mycontroller', function($scope,$http) {
 	$scope.myData.push({"question" : $scope.input.question});
 	//$scope.input.question = " ";
 	$http.post('/consecutivecalls',$scope.input).then(function(response){
-		console.log('function is hit');
+		        $scope.input.question = " ";
 			$scope.myData.push(response.data);
 			console.log("response received");
 	});
@@ -44,7 +44,7 @@ app.controller('mycontroller', function($scope,$http) {
 
 
 
-<div style="overflow-y : scroll" align="center" ng-repeat = "x in myData"> 
+<div align="center" ng-repeat = "x in myData"> 
 <font color="red"> <div  ng-if = "x.question"> {{x.question}} </div> </font>
 <font color="blue"> <div  ng-if = "x.text[0]">
 {{ x.text[0]  }}  
