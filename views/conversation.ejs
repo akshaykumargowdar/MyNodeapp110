@@ -19,6 +19,7 @@ app.controller('mycontroller', function($scope,$http) {
 	$scope.send1 = function(){
         console.log($scope.input.question);
 	$scope.myData.push({"question" : $scope.input.question});
+	$scope.input.question = " ";
 	$http.post('/consecutivecalls',$scope.input).then(function(response){
 		console.log('hit');
 			$scope.myData.push(response.data);
