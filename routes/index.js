@@ -30,7 +30,7 @@ router.get('/firstcall', function(req, res, next) {
   										else
 										{
 										  context = response.context;
-    										  res.send(response.output.text[0]);
+    										  res.send(response.output);
 										}
 									     });
 
@@ -50,7 +50,7 @@ router.post('/consecutivecalls', function(req, res) {
   										else
 										{
 										  context = response.context;
-    										  res.send(response.output.text[0]);
+    										  res.send(response.output);
 										}
 									     });
 
