@@ -18,7 +18,7 @@ app.controller('mycontroller', function($scope,$http) {
 	
 	$scope.send1 = function(){
         console.log($scope.input.question);
-	$scope.myData.push($scope.input.question);
+	$scope.myData.push({"question" : $scope.input.question});
 	$http.post('/consecutivecalls',$scope.input).then(function(response){
 		console.log('hit');
 			$scope.myData.push(response.data);
@@ -41,7 +41,12 @@ app.controller('mycontroller', function($scope,$http) {
 
 <form name="myForm" >
 <table align="center">
-<tr> <td> <div rows="15" cols="50" ng-repeat = "x in myData"> {{ x.text[0]  }}  <br> </div> </td></tr>
+<tr> <td> <div rows="15" cols="50" ng-repeat = "x in myData"> 
+<div ng-if = "x.question"> {{x.question}} </div>
+<div ng-if = "x.text[0]">
+{{ x.text[0]  }}  
+</div>
+<br> </div> </td></tr>
 <br>
 
 <td> <input type="text" ng-model="input.question" / > </td>
