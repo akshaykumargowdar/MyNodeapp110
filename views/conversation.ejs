@@ -41,21 +41,23 @@ app.controller('mycontroller', function($scope,$http) {
 <br><br>
 
 
-<table align="center">
-<tr> <td> <div style=" overflow-y : scroll; height : 50px; "  ng-repeat = "x in myData"> 
+
+<div style=" overflow-y : scroll; height : 50px; "  ng-repeat = "x in myData"> 
 <div ng-if = "x.question"> {{x.question}} </div>
 <div ng-if = "x.text[0]">
 {{ x.text[0]  }}  
 </div>
-<br> </div> </td></tr>
-<br>
-</table>
+</div> 
 
+
+
+<br><br><br><br><br>
+<div>
 <table border="0" align="center">
 <tr> <td> <input type="text" ng-model="input.question" / > </td> 
 <td> <button type="button" ng-click="send1()" > Send </button> </td> </tr>
-
 </table>
+</div>
 
 </body>
 </html>
