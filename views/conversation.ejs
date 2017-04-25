@@ -14,6 +14,7 @@ app.controller('mycontroller', function($scope,$http) {
 	$scope.myData = [];
 	$http.get('/firstcall').then(function(response){
 			$scope.myData.push(response.data);
+			console.log(response.data);
 	});
 	
 	$scope.send1 = function(){
@@ -42,9 +43,9 @@ app.controller('mycontroller', function($scope,$http) {
 
 
 
-<div align="center" style=" overflow-y : scroll; height : 50px; "  ng-repeat = "x in myData"> 
-<div ng-if = "x.question"> {{x.question}} </div>
-<div ng-if = "x.text[0]">
+<div align="center" style=" width : 150px; height : 150px; overflow : scroll;"  ng-repeat = "x in myData"> 
+<font color="red"> <div align="right" ng-if = "x.question"> {{x.question}} </div> </font>
+<font color="blue"> <div align="left" ng-if = "x.text[0]"> </font>
 {{ x.text[0]  }}  
 </div>
 </div> 
