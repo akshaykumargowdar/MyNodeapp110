@@ -42,7 +42,7 @@ router.post('/consecutivecalls', function(req, res) {
 	
   					conversation.message({
   					workspace_id: '1e018105-1f52-4539-acbe-ac166b80631a',
-  				 	input: {'text': "search for phone" },
+  				 	input: {'text': req.body.question },
   						context: context
 						},  function(err, response) {
   										if (err)
@@ -56,24 +56,7 @@ router.post('/consecutivecalls', function(req, res) {
 
                                        
 					});
-router.get('/consecutivecalls', function(req, res) {
-	
-  					conversation.message({
-  					workspace_id: '1e018105-1f52-4539-acbe-ac166b80631a',
-  				 	input: {'text': "search for phone" },
-  						context: context
-						},  function(err, response) {
-  										if (err)
-    										console.log('error:', err);
-  										else
-										{
-										  context = response.context;
-    										  res.send(response.output.text[0]);
-										}
-									     });
 
-                                       
-					});
 var text_to_speech = new TextToSpeechV1({
     username: '69bfd0da-dd82-416c-8043-901a66dda6b0',
     password: 'yT2ZMmqPKrDv',
