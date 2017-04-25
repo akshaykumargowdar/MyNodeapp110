@@ -16,13 +16,13 @@ app.controller('mycontroller', function($scope,$http) {
 			$scope.myData.push(response.data);
 	});
 	
-	function send1() {
+	$scope.send1 = function(){
         console.log($scope.input.question);
 	$scope.myData.push($scope.input.question);
 	$http.post('/consecutivecalls').then(function(response){
 			$scope.myData.push(response.data);
 	});
-	
+	}
 });
 
 
