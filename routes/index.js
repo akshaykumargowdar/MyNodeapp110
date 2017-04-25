@@ -28,7 +28,10 @@ router.get('/firstcall', function(req, res, next) {
   										if (err)
     										console.log('error:', err);
   										else
+										{
+										  context = response.context;
     										  res.send(response.output.text[0]);
+										}
 									     });
 
                                        
