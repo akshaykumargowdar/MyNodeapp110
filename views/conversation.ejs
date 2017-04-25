@@ -40,21 +40,23 @@ app.controller('mycontroller', function($scope,$http) {
 <h1 align="center"> Welcome to the chat App </h1>
 <br><br>
 
-<form name="myForm" >
+
 <table align="center">
-<tr> <td> <div rows="15" cols="50" ng-repeat = "x in myData"> 
+<tr> <td> <div style=" overflow-y : scroll; height : 50px; "  ng-repeat = "x in myData"> 
 <div ng-if = "x.question"> {{x.question}} </div>
 <div ng-if = "x.text[0]">
 {{ x.text[0]  }}  
 </div>
 <br> </div> </td></tr>
 <br>
+</table>
 
-<td> <input type="text" ng-model="input.question" / > </td>
-<td> <button type="button" ng-click="send1()" > Send </button> </td>
+<table border="0" align="center">
+<tr> <td> <input type="text" ng-model="input.question" / > </td> 
+<td> <button type="button" ng-click="send1()" > Send </button> </td> </tr>
 
 </table>
-</form>
+
 </body>
 </html>
 
