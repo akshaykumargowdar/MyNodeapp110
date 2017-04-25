@@ -45,10 +45,11 @@ app.controller('mycontroller', function($scope,$http) {
 
 
 <div align="center" ng-repeat = "x in myData"> 
-<div ng-if = "x.question"> {{x.question}} </div>
-<div ng-if = "x.text[0]">
+<font color="red"> <div ng-if = "x.question"> {{x.question}} </div> </font>
+<font color="blue"> <div ng-if = "x.text[0]">
 {{ x.text[0]  }}  
 </div>
+</font>
 </div> 
 
 
