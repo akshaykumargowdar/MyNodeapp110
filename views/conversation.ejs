@@ -42,14 +42,14 @@ app.controller('mycontroller', function($scope,$http) {
 <br><br>
 
 
-<div align="center" style=" width : 150px; height : 150px; overflow : scroll;"> 
+
 <div ng-repeat = "x in myData"> 
 <font color="red"> <div align="right" ng-if = "x.question"> {{x.question}} </div> </font>
 <font color="blue"> <div align="left" ng-if = "x.text[0]"> </font>
 {{ x.text[0]  }}  
 </div>
 </div> 
-</div>
+
 
 
 
