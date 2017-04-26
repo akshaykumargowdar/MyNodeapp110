@@ -23,7 +23,7 @@ router.get('/firstcall', function(req, res, next) {
   					conversation.message({
   					workspace_id: '1e018105-1f52-4539-acbe-ac166b80631a',
   				 	input: {'text': " " },
-  						context: " "
+  						
 						},  function(err, response) {
   										if (err)
     										console.log('error:', err);
