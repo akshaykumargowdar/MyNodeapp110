@@ -31,6 +31,7 @@ router.get('/firstcall', function(req, res, next) {
 										{
 										  context = response.context;
     										  res.send(response.output);
+										  concole.log("response received");
 										}
 									     });
 
